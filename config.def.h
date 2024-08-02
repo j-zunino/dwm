@@ -1,8 +1,18 @@
 /* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>
 
 /* Helper macros for spawning commands */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 #define CMD(...)   { .v = (const char*[]){ __VA_ARGS__, NULL } }
+
+/* audio */
+static const char *mutevol[]    = { "wpctl",   "set-mute",   "@DEFAULT_AUDIO_SINK@",      "toggle",   NULL };
+static const char *downvol[]    = { "wpctl",   "set-volume", "@DEFAULT_AUDIO_SINK@",      "5%-",      NULL };
+static const char *upvol[]      = { "wpctl",   "set-volume", "@DEFAULT_AUDIO_SINK@",      "5%+",      NULL };
+
+/* brightness */
+static const char *light_down[] = { "brightnessctl",   "set", "5%-", NULL };
+static const char *light_up[]   = { "brightnessctl",   "set", "5%+", NULL };
 
 /* appearance */
 #if ROUNDED_CORNERS_PATCH
@@ -907,6 +917,15 @@ static const Key on_empty_keys[] = {
 #endif // ON_EMPTY_KEYS_PATCH
 
 static const Key keys[] = {
+	/* audio */
+	{ 0,		XF86XK_AudioMute,		spawn,		{.v = mutevol } },
+	{ 0,		XF86XK_AudioLowerVolume,	spawn,		{.v = downvol } },
+	{ 0,		XF86XK_AudioRaiseVolume,	spawn,		{.v = upvol   } },
+
+	/* brightness */
+	{ 0,		XF86XK_MonBrightnessUp,		spawn,		{.v = light_up} },
+	{ 0,		XF86XK_MonBrightnessDown,	spawn,		{.v = light_down} },
+
 	/* modifier                     key            function                argument */
 	#if KEYMODES_PATCH
 	{ MODKEY,                       XK_Escape,     setkeymode,             {.ui = COMMANDMODE} },
