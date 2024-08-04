@@ -188,7 +188,7 @@ static char normbordercolor[]            = "#3a464c"; // bg1
 static char normfloatcolor[]             = "#5c3f4f"; // bg_red
 
 static char selfgcolor[]                 = "#d3c6aa"; // fg
-static char selbgcolor[]                 = "#293136"; // bg_dim
+static char selbgcolor[]                 = "#a7c080"; // green
 static char selbordercolor[]             = "#a7c080"; // green
 static char selfloatcolor[]              = "#e67e80"; // red
 
