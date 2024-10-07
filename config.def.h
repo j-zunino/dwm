@@ -465,18 +465,20 @@ static Sp scratchpads[] = {
  * them. This works seamlessly with alternative tags and alttagsdecoration patches.
  */
 #if NAMETAG_PATCH
-static char tagicons[][1][MAX_TAGLEN] =
+static char tagicons[][NUMTAGS][MAX_TAGLEN] =
+// static char tagicons[][1][MAX_TAGLEN] =
 #else
-static char *tagicons[][1] =
+static char *tagicons[][NUMTAGS] =
+//static char *tagicons[][1] =
 #endif // NAMETAG_PATCH
-{
-    [DEFAULT_TAGS] = { "⬤" },
-};
-/*
 {
 	[DEFAULT_TAGS]        = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
 	[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },
 	[ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },
+};
+/*
+{
+    [DEFAULT_TAGS] = { "⬤" },
 };
 */
 #if BAR_TAGGRID_PATCH
@@ -894,7 +896,7 @@ static const char *dmenucmd[] = {
 	#endif // BAR_DMENUMATCHTOP_PATCH
 	NULL
 };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { "st", NULL };
 
 #if BAR_STATUSCMD_PATCH
 #if BAR_DWMBLOCKS_PATCH
@@ -1814,3 +1816,4 @@ static IPCCommand ipccommands[] = {
 	#endif // XRDB_PATCH
 };
 #endif // IPC_PATCH
+
